@@ -1,11 +1,12 @@
 import "./App.css";
 import React, { useState, useMemo } from "react";
 
-function App({ value, onChange }) {
-  const [text, setText] = useState();
+function App({ value }) {
+  const [text, setText] = useState(value);
   const isValid = useMemo(() => {
     return /^\d+$/.test(text);
   }, [text]);
+  const onChange = (ev) => setText(ev.target.value);
 
   return (
     <div className="App">
@@ -14,10 +15,10 @@ function App({ value, onChange }) {
           className="input is-large"
           type="text"
           placeholder="Enter number..."
-          value={text} onChange={(ev) => setText(ev.target.value)}
+          value={text} onChange={onChange}
         />
         <span className="icon is-small is-right">
-          <i className={`fas ${isValid ? 'fa-check' : 'fa-times'}`} />
+          <i className={`${isValid ? 'fas fa-check' : 'fas fa-times'}`} />
         </span>
       </div>
     </div>
